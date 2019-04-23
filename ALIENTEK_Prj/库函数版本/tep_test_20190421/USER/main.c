@@ -12,17 +12,27 @@
  作者：正点原子 @ALIENTEK
 ************************************************/
 
-int main(void)
- {		
- 	u8 t=0;
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//设置中断优先级分组为组2：2位抢占优先级，2位响应优先级
-	delay_init();	    	 //延时函数初始化	  
-	uart_init(115200);	 //串口初始化为115200
-  while(1)
-	{
-		printf("t:%d\r\n",t);
-		delay_ms(500);
-		t++;
-	}	 
-} 
+#include "led.h"
 
+
+
+int main(void)
+{	
+    delay_init();
+    LED_Init();
+//    GPIO_ResetBits(GPIOE,GPIO_Pin_5);
+//    GPIO_ResetBits(GPIOB,GPIO_Pin_5);
+//    delay_ms(1000);
+//    GPIO_SetBits(GPIOB,GPIO_Pin_5);
+//    delay_ms(100);
+    while(1)
+    {
+        PEout(5)=1;
+        PBout(5)=1;
+        delay_ms(500);
+        PEout(5)=0;
+        PBout(5)=0;
+        delay_ms(500);
+    }
+	 
+} 
