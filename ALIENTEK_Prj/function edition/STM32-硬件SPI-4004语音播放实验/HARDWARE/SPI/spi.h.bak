@@ -1,0 +1,16 @@
+#ifndef __SPI_H
+#define __SPI_H
+#include "sys.h"
+
+#define	SS          PBout(12)  //	片选信号
+
+void CS_Init(void);        //片选信号初始化函数
+void SPI2_Init(void);
+
+void ISD4004(unsigned int ISD4004_order);       //ISD4004命令函数
+void PLAY(unsigned int PLAY_address);          //放音函数  
+void stop(void);                               //停止命令
+void REC(unsigned int REC_address);            //录音函数
+
+#endif
+
