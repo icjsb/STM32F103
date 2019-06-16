@@ -425,11 +425,6 @@
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\W25QXX\w25qxx.c</FilePath>
             </File>
-            <File>
-              <FileName>sdio_sdcard.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HARDWARE\SDIO\sdio_sdcard.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -520,6 +515,11 @@
         <Group>
           <GroupName>MALLOC</GroupName>
           <Files>
+            <File>
+              <FileName>sdio_sdcard.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\SDIO\sdio_sdcard.c</FilePath>
+            </File>
             <File>
               <FileName>malloc.c</FileName>
               <FileType>1</FileType>

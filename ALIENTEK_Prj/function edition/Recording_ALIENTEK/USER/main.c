@@ -14,6 +14,14 @@
 #include "vs10xx.h"
 #include "tpad.h"	   
 #include "recorder.h"	 
+#include "24cxx.h"
+#include "touch.h"
+
+#include "mrrlcd.h"
+#include "vs10xx.h"
+#include "mp3player.h"	
+#include "SendData.h"
+#include "sram.h"	 
 
  
 /************************************************
@@ -26,13 +34,15 @@
  作者：正点原子 @ALIENTEK
 ************************************************/
 
+
  int main(void)
  {	 
  
 	delay_init();	    	 //延时函数初始化	  
   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//设置中断优先级分组为组2：2位抢占优先级，2位响应优先级
 	uart_init(115200);	 	//串口初始化为115200
- 	LED_Init();		  			//初始化与LED连接的硬件接口
+	usmart_dev.init(72);		//初始化USMART
+	 LED_Init();		  			//初始化与LED连接的硬件接口
 	KEY_Init();					//初始化按键
 	TPAD_Init(6);				//初始化触摸按键	  
 	LCD_Init();			   		//初始化LCD     
@@ -41,33 +51,34 @@
  	my_mem_init(SRAMIN);		//初始化内部内存池
 	exfuns_init();				//为fatfs相关变量申请内存  
  	f_mount(fs[0],"0:",1); 		//挂载SD卡 
- 	f_mount(fs[1],"1:",1); 		//挂载FLASH.
-	POINT_COLOR=RED;       
+ 	f_mount(fs[1],"1:",1); 		//挂载FLASH. 
+	 
+	 tp_dev.init(); //触摸屏初始化
+	 
  	while(font_init()) 				//检查字库
 	{	    
 		LCD_ShowString(30,50,200,16,16,"Font Error!");
 		delay_ms(200);				  
-		LCD_Fill(30,50,240,66,WHITE);//清除显示	     
+		LCD_Fill(30,50,800,480,WHITE);//清除显示	   
+		
 	}
- 	Show_Str(30,50,200,16,"战舰 STM32开发板",16,0);				    	 
-	Show_Str(30,70,200,16,"WAV录音机实验",16,0);				    	 
-	Show_Str(30,90,200,16,"正点原子@ALIENTEK",16,0);				    	 
-	Show_Str(30,110,200,16,"2015年1月21日",16,0);
-	Show_Str(30,130,200,16,"KEY0:REC/PAUSE",16,0);
-	Show_Str(30,150,200,16,"KEY2:STOP&SAVE",16,0);
-	Show_Str(30,170,200,16,"KEY_UP:AGC+ KEY1:AGC-",16,0);
-	Show_Str(30,190,200,16,"TPAD:Play The File",16,0);
-	while(1)
-	{
-  		LED1=0; 	  
-		Show_Str(30,210,200,16,"存储器测试...",16,0);
-		printf("Ram Test:0X%04X\r\n",VS_Ram_Test());//打印RAM测试结果	    
-		Show_Str(30,210,200,16,"正弦波测试...",16,0); 	 	 
- 		VS_Sine_Test();	   
-		Show_Str(30,210,200,16,"<<WAV录音机>>",16,0); 		 
-		LED1=1;
-		recoder_play();
-	} 	   										    
+	mrrlcd_msg_show();
+	
+ 	
+		POINT_COLOR=RED;//设置字体为红色
+   		
+		LED0=0;
+		LED1=0;
+		Recording_Dialog();
+		while(1)
+		{
+			//tp_dev.scan(0);
+
+			touch_swtich();
+		}
+
+
+
 }
 
 

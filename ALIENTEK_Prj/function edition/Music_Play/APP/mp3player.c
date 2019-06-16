@@ -123,7 +123,7 @@ void mp3_play(void)
 	u8 key;				//键值		  
  	u16 temp;
 	u16 *mp3indextbl;	//音乐索引表 
- 	while(f_opendir(&mp3dir,"0:/MUSIC"))//打开图片文件夹
+ 	while(f_opendir(&mp3dir,"0:/MUSIC"))//打开音乐文件夹
  	{	    
 		Show_Str(30,190,240,16,"MUSIC文件夹错误!",16,0);
 		delay_ms(200);				  
@@ -213,7 +213,11 @@ u8 mp3_play_song(u8 *pname)
 	u8 res,rval;	  
 	u8 *databuf;	   		   
 	u16 i=0; 
-	u8 key;  	    
+	u8 key;  	
+
+
+		LCD_ShowString(30,270,310,16,24,pname);
+	LCD_ShowString(30,290,310,16,24,pname);
 			   
 	rval=0;	    
 	fmp3=(FIL*)mymalloc(SRAMIN,sizeof(FIL));//申请内存

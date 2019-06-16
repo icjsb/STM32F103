@@ -15,7 +15,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 		   															 
  //RIFF块
-typedef __packed struct
+typedef __packed struct  //__packed是字节对齐的意思
 {
     u32 ChunkID;		   	//chunk id;这里固定为"RIFF",即0X46464952
     u32 ChunkSize ;		   	//集合大小;文件总大小-8

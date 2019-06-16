@@ -27,7 +27,11 @@
  {	 
  	u32 total,free;
 	u8 t=0;	
-	u8 res=0;	    	    
+	u8 res=0;	    	
+
+	FIL fp1,fp2; FRESULT state01; UINT btw1,btw2;u8 buff1[50],buff2[50];	
+		u8  *pp,tmp,i,L;
+
 
 	delay_init();	    	 //延时函数初始化	  
   NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//设置中断优先级分组为组2：2位抢占优先级，2位响应优先级
@@ -52,6 +56,8 @@
 		delay_ms(500);
 		LED0=!LED0;//DS0闪烁
 	}
+	
+	
  	exfuns_init();							//为fatfs相关变量申请内存				 
   	f_mount(fs[0],"0:",1); 					//挂载SD卡 
  	res=f_mount(fs[1],"1:",1); 				//挂载FLASH.	
@@ -80,12 +86,104 @@
 	LCD_ShowString(30,170,200,16,16,"SD Total Size:     MB");	 
 	LCD_ShowString(30,190,200,16,16,"SD  Free Size:     MB"); 	    
  	LCD_ShowNum(30+8*14,170,total>>10,5,16);				//显示SD卡总容量 MB
- 	LCD_ShowNum(30+8*14,190,free>>10,5,16);					//显示SD卡剩余容量 MB			    
+ 	LCD_ShowNum(30+8*14,190,free>>10,5,16);		
+
+	
+	for(i=0;i<=50;i++)
+	{
+			 buff1[i]=0;
+		 buff2[i]=0;
+	}
+
+		L = sizeof("123486 hello world!!");
+	state01= f_open(&fp1,"0:/RECORDER/testt.txt",FA_OPEN_ALWAYS|FA_WRITE);
+	if(state01)
+{LCD_ShowString(30,280,300,16,24,"TEXT CREAT fail!");}
+	else
+	{
+		f_write(&fp1,(const void* )"123486 hello world!!",L,&btw1);
+		//f_write(&fp1,(const void* )"goodbye!!",10,&btw1);
+	}
+		f_close(&fp1);
+//	f_open(&fp1,"0:/RECORDER/testt.txt",FA_WRITE);
+//	f_write(&fp1,(const void* )"goodbye!!",10,&btw1);
+//	f_close(&fp1);
+	
+	
+//	f_open(&fp1,"0:/RECORDER/testt1.txt",FA_CREATE_ALWAYS|FA_WRITE);
+//	f_write(&fp1,(const void* )"file1!!",10,&btw1);
+//	f_close(&fp1);
+//	f_open(&fp2,"0:/RECORDER/testt2.txt",FA_CREATE_ALWAYS|FA_WRITE);
+//	f_write(&fp2,(const void* )"file2!!",10,&btw2);
+	
+	
+	f_close(&fp2);
+	
+	
+	
+	
+	
+	state01= f_open(&fp1,"0:/RECORDER/testt.txt",FA_READ);
+	
+	if(state01)
+{LCD_ShowString(30,300,300,16,24,"read fail!");}
+	else
+	{
+		f_read(&fp1,buff1,5,&btw1);
+		LCD_ShowString(30,480,310,16,24,buff1);
+		f_read(&fp1,buff1,5,&btw1);
+		LCD_ShowString(30,500,310,16,24,buff1);
+		
+		f_close(&fp1);
+		LCD_ShowString(30,280,310,16,24,"Write success!");
+		f_open(&fp2,"0:/RECORDER/revv.txt", FA_OPEN_ALWAYS|FA_WRITE);
+		f_write(&fp2,(const void* )buff1,L,&btw2);
+		f_close(&fp2);
+		
+	}	
+		LCD_ShowString(30,300,310,16,24,buff1);
+	state01= f_open(&fp2,"0:/RECORDER/revv.txt", FA_READ);
+	
+		if(state01)LCD_ShowString(30,330,300,16,24,"revv read fail!");
+	else
+	{
+
+		f_read(&fp2,buff2,L,&btw2);
+		f_close(&fp2);
+		pp = buff2;
+		while(*pp)
+		{
+			tmp=*pp;
+			for(i=0;i<8;i++)
+			{
+				if(tmp&0x80)
+				{
+					LED1=1;
+					LED0=1;
+				}
+				else
+				{
+					LED1=0;
+					LED0=0;
+				}
+				tmp<<=1;
+				delay_ms(100);
+			}
+
+			pp++;
+		}
+		LCD_ShowString(30,330,310,16,24,"LED send over!");
+	}
+	
+	
+	
+
+	//显示SD卡剩余容量 MB			    
 	while(1)
 	{
 		t++; 
 		delay_ms(200);		 			   
-		LED0=!LED0;
+		LED0=0;
 	} 
 }
 

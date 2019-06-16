@@ -152,7 +152,7 @@ void ctp_test(void)
 	while(1)
 	{
 		tp_dev.scan(0);
-		for(t=0;t<CT_MAX_TOUCH;t++)
+		//for(t=0;t<CT_MAX_TOUCH;t++)
 		{
 			if((tp_dev.sta)&(1<<t))
 			{
@@ -197,11 +197,16 @@ void ctp_test(void)
 	LCD_ShowString(60,90,200,16,16,"ATOM@ALIENTEK");
 	LCD_ShowString(60,110,200,16,16,"2015/1/15");
    	LCD_ShowString(60,130,200,16,16,"Press KEY0 to Adjust");	
-   	if(tp_dev.touchtype!=0XFF)LCD_ShowString(60,130,200,16,16,"Press KEY0 to Adjust");//µç×èÆÁ²ÅÏÔÊ¾
+	 
+   	if(tp_dev.touchtype!=0XFF)
+		LCD_ShowString(60,130,200,16,16,"Press KEY0 to Adjust");//µç×èÆÁ²ÅÏÔÊ¾
 	delay_ms(1500);
+	 
 	Load_Drow_Dialog();	 	
-	if(tp_dev.touchtype&0X80)ctp_test();	//µçÈÝÆÁ²âÊÔ
-	else rtp_test(); 						//µç×èÆÁ²âÊÔ
+	if(tp_dev.touchtype&0X80)
+		ctp_test();	//µçÈÝÆÁ²âÊÔ
+	else 
+		rtp_test(); 						//µç×èÆÁ²âÊÔ
 }
 
 

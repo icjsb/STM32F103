@@ -38,8 +38,8 @@ const u16 wav_plugin[40]=/* Compressed plugin */
 void recoder_enter_rec_mode(u16 agc)
 {
 	//如果是IMA ADPCM,采样率计算公式如下:
- 	//采样率=CLKI/256*d;	
-	//假设d=0,并2倍频,外部晶振为12.288M.那么Fc=(2*12288000)/256*6=16Khz
+ 	//采样率=CLKI/(256*d);	
+	//假设d=6,并2倍频,外部晶振为12.288M.那么Fc=(2*12288000)/256*6=16Khz
 	//如果是线性PCM,采样率直接就写采样值 
    	VS_WR_Cmd(SPI_BASS,0x0000);    
  	VS_WR_Cmd(SPI_AICTRL0,8000);	//设置采样率,设置为8Khz
@@ -76,10 +76,10 @@ void recoder_wav_init(__WaveHeader* wavhead) //初始化WAV头
 void recoder_show_time(u32 tsec)
 {   
 	//显示录音时间			 
-	LCD_ShowString(30,250,200,16,16,"TIME:");	  	  
-	LCD_ShowxNum(30+40,250,tsec/60,2,16,0X80);	//分钟
-	LCD_ShowChar(30+56,250,':',16,0);
-	LCD_ShowxNum(30+64,250,tsec%60,2,16,0X80);	//秒钟		
+	LCD_ShowString(30,650+120,200,16,16,"TIME:");	  	  
+	LCD_ShowxNum(30+40,650+120,tsec/60,2,16,0X80);	//分钟
+	LCD_ShowChar(30+56,650+120,':',16,0);
+	LCD_ShowxNum(30+64,650+120,tsec%60,2,16,0X80);	//秒钟		
 }  	   
 //通过时间获取文件名
 //仅限在SD卡保存,不支持FLASH DISK保存
@@ -90,7 +90,7 @@ void recoder_new_pathname(u8 *pname)
 	u16 index=0;
 	while(index<0XFFFF)
 	{
-		sprintf((char*)pname,"0:RECORDER/REC%05d.wav",index);
+		sprintf((char*)pname,"0:RECORDER/REC%03d.wav",index);
 		res=f_open(ftemp,(const TCHAR*)pname,FA_READ);//尝试打开这个文件
 		if(res==FR_NO_FILE)break;		//该文件名不存在=正是我们需要的.
 		index++;
@@ -101,9 +101,9 @@ void recoder_new_pathname(u8 *pname)
 //agc:增益值 1~15,表示1~15倍;0,表示自动增益
 void recoder_show_agc(u8 agc)
 {  
-	LCD_ShowString(30+110,250,200,16,16,"AGC:    ");	  	//显示名称,同时清楚上次的显示	  
-	if(agc==0)LCD_ShowString(30+142,250,200,16,16,"AUTO");	//自动agc	  	  
-	else LCD_ShowxNum(30+142,250,agc,2,16,0X80);			//显示AGC值	 
+	LCD_ShowString(30+110,650+120,200,16,16,"AGC:    ");	  	//显示名称,同时清楚上次的显示	  
+	if(agc==0)LCD_ShowString(30+142,650+120,200,16,16,"AUTO");	//自动agc	  	  
+	else LCD_ShowxNum(30+142,650+120,agc,2,16,0X80);			//显示AGC值	 
 } 
 
 //播放pname这个wav文件（也可以是MP3等）		 
@@ -155,6 +155,7 @@ u8 rec_play_wav(u8 *pname)
 u8 recoder_play(void)
 {
 	u8 res;
+	u8 playtime=0;
 	u8 key;
 	u8 rval=0;
 	__WaveHeader *wavhead=0;
@@ -174,11 +175,12 @@ u8 recoder_play(void)
  	u8 recagc=4;					//默认增益为4
   	while(f_opendir(&recdir,"0:/RECORDER"))//打开录音文件夹
  	{	 
-		Show_Str(30,230,240,16,"RECORDER文件夹错误!",16,0);
+		Show_Str(30,630,240,16,"RECORDER文件夹错误!",16,0);
 		delay_ms(200);				  
-		LCD_Fill(30,230,240,246,WHITE);		//清除显示	     
+		LCD_Fill(30,630,240,246,WHITE);		//清除显示	     
 		delay_ms(200);				  
-		f_mkdir("0:/RECORDER");				//创建该目录   
+		f_mkdir("0:/RECORDER");				//创建该目录 
+		f_closedir(&recdir);		
 	} 
   	f_rec=(FIL *)mymalloc(SRAMIN,sizeof(FIL));	//开辟FIL字节的内存区域 
 	if(f_rec==NULL)rval=1;	//申请失败
@@ -197,6 +199,7 @@ u8 recoder_play(void)
 		pname[0]=0;								//pname没有任何文件名		 
  	   	while(rval==0)
 		{
+
 			key=KEY_Scan(0);
 			switch(key)
 			{		
@@ -213,7 +216,7 @@ u8 recoder_play(void)
 					rec_sta=0;
 					recsec=0;
 				 	LED1=1;	 						//关闭DS1
-					LCD_Fill(30,230,240,246,WHITE);	//清除显示,清除之前显示的录音文件名	     
+					LCD_Fill(30,630,240,246,WHITE);	//清除显示,清除之前显示的录音文件名	     
 					recoder_show_time(recsec);		//显示时间
 					break;	 
 				case KEY0_PRES:	//REC/PAUSE
@@ -227,7 +230,7 @@ u8 recoder_play(void)
 					{
 	 					rec_sta|=0X80;	//开始录音	 	 
 						recoder_new_pathname(pname);			//得到新的名字
-						Show_Str(30,230,240,16,pname+11,16,0);	//显示当前录音文件名字
+						Show_Str(30,630+120,240,16,pname+11,16,0);	//显示当前录音文件名字
 				 		recoder_wav_init(wavhead);				//初始化wav数据	
 	 					res=f_open(f_rec,(const TCHAR*)pname, FA_CREATE_ALWAYS | FA_WRITE); 
 						if(res)			//文件创建失败
@@ -248,6 +251,12 @@ u8 recoder_play(void)
 					VS_WR_Cmd(SPI_AICTRL1,1024*recagc);	//设置增益,0,自动增益.1024相当于1倍,512相当于0.5倍
 					break;
 			} 
+			
+			
+
+			
+			
+			
 ///////////////////////////////////////////////////////////
 //读取数据			  
 			if(rec_sta==0X80)//已经在录音了
@@ -269,39 +278,64 @@ u8 recoder_play(void)
 						printf("bw:%d\r\n",bw);
 						break;//写入出错.	  
 					}
-					sectorsize++;//扇区数增加1,约为32ms	 
+					sectorsize++;//扇区数增加1,约为32ms	512*8/8k*2*8 = 32ms
 				}			
 			}else//没有开始录音，则检测TPAD按键
 			{								  
 				if(TPAD_Scan(0)&&pname[0])//如果触摸按键被按下,且pname不为空
 				{				 
-					Show_Str(30,230,240,16,"播放:",16,0);		   
-					Show_Str(30+40,230,240,16,pname+11,16,0);	//显示当播放的文件名字   
+					Show_Str(30,630+120,240,16,"播放:",16,0);		   
+					Show_Str(30+40,630+120,240,16,pname+11,16,0);	//显示当播放的文件名字   
+					playtime++;
+					if(playtime>5)playtime=5;
 					rec_play_wav(pname);						//播放pname
-					LCD_Fill(30,230,240,246,WHITE);				//清除显示,清除之前显示的录音文件名	  
+					LCD_Fill(30,630+120,240,246,WHITE);				//清除显示,清除之前显示的录音文件名	  
 					recoder_enter_rec_mode(1024*recagc);		//重新进入录音模式		
 			   		while(VS_RD_Reg(SPI_HDAT1)>>8);				//等到buf 较为空闲再开始  
 			  		recoder_show_time(recsec);					//显示时间
 					recoder_show_agc(recagc);					//显示agc
+					
+					
+
  				}
 				delay_ms(5);
 				timecnt++;
 				if((timecnt%20)==0)LED0=!LED0;//DS0闪烁 
+				
+									if(TPAD_Scan(0))
+					{
+								
+								LCD_Fill(450-16*5-16*5,540+60,500,540+60+16,WHITE);				//清除之前的显示
+								Show_Str(450-16*5-80-16*5,540+60,240,16,"返回成功",16,0);
+								delay_ms(5000);
+								LCD_Fill(450-16*5-80-16*5,540+60,500,540+60+16,WHITE);				//清除之前的显示
+								Show_Str(450-16*5-80-16*5,540+60,240,16,"请选择功能",16,0);
+						
+								LCD_Fill(0,510+120,250,500,WHITE);				//清除之前的显示
+						
+								goto L2;
+					}
+				
+
 			}
 /////////////////////////////////////////////////////////////
- 			if(recsec!=(sectorsize*4/125))//录音时间显示
+ 			if(recsec!=(sectorsize*4/125))//录音时间显示  XX * 32ms/1000=xxx s
 			{	   
 				LED0=!LED0;//DS0闪烁 
 				recsec=sectorsize*4/125;
 				recoder_show_time(recsec);//显示时间
 			}
 		}					   
-	}	   		   				    
-	myfree(SRAMIN,wavhead);
-	myfree(SRAMIN,recbuf);	  
- 	myfree(SRAMIN,f_rec);	 
-	myfree(SRAMIN,pname);
-	return rval;
+	}	
+
+
+L2:		f_close(f_rec);
+			f_closedir(&recdir);
+			myfree(SRAMIN,wavhead);
+			myfree(SRAMIN,recbuf);	  
+			myfree(SRAMIN,f_rec);	 
+			myfree(SRAMIN,pname);
+			return rval;
 }
 
 

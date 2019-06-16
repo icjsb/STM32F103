@@ -53,16 +53,16 @@ void VS_Init(void)
  	
  	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC|RCC_APB2Periph_GPIOE|RCC_APB2Periph_GPIOF, ENABLE);	 //使能PC,PE,PF端口时钟
 	
- 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;				 //PC13
- 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU; 		 //输入
+ 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;				 //PC13--DREQ
+ 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU; 		 //上拉输入
  	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
  	GPIO_Init(GPIOC, &GPIO_InitStructure);
 
- 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;	 //PE6
+ 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;	 //PE6--RST
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 		 //推挽输出
 	GPIO_Init(GPIOE, &GPIO_InitStructure);
 							  
- 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6|GPIO_Pin_7;//PF6,PF7
+ 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6|GPIO_Pin_7;//PF6--XCS,PF7--XDCS
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 		 //推挽输出
 	GPIO_Init(GPIOF, &GPIO_InitStructure);	
 	
@@ -367,7 +367,10 @@ void VS_Restart_Play(void)
 		{
 			if(VS_Send_MusicData(vsbuf)==0)i+=32;//填充	  
 		}   	
-	}else VS_Soft_Reset();  	//SM_CANCEL不成功,坏情况,需要软复位 	  
+	}
+	else 
+		VS_Soft_Reset();  	//SM_CANCEL不成功,坏情况,需要软复位 	 
+	
 	temp=VS_RD_Reg(SPI_HDAT0); 
     temp+=VS_RD_Reg(SPI_HDAT1);
 	if(temp)					//软复位,还是没有成功取消,放杀手锏,硬复位
@@ -422,7 +425,8 @@ void VS_Set_Vol(u8 volx)
 {
     u16 volt=0; 			//暂存音量值
     volt=254-volx;			//取反一下,得到最大值,表示最大的表示 
-	volt<<=8;
+	volt<<=8;				//高字节是控制左通道音量的
+							//低字节是控制右通道音量的
     volt+=254-volx;			//得到音量设置后大小
     VS_WR_Cmd(SPI_VOL,volt);//设音量 
 }

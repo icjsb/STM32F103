@@ -26,6 +26,7 @@
  	LED_Init();			     //LED端口初始化
 	LCD_Init();
 	POINT_COLOR=RED;
+	usmart_init(72);
 	sprintf((char*)lcd_id,"LCD ID:%04X",lcddev.id);//将LCD ID打印到lcd_id数组。				 	
   	while(1) 
 	{		 
@@ -50,7 +51,7 @@
 		LCD_ShowString(30,70,200,16,16,"TFTLCD TEST");
 		LCD_ShowString(30,90,200,16,16,"ATOM@ALIENTEK");
  		LCD_ShowString(30,110,200,16,16,lcd_id);		//显示LCD ID
-		LCD_ShowString(30,130,200,12,12,"2014/5/4");	      	
+		LCD_ShowString(30,130,400,12,12,"2014/5/4");	      	
 	    x++;
 		if(x==12)x=0;
 		LED0=!LED0;				   		 

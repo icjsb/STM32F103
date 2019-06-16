@@ -1,0 +1,51 @@
+..\obj\senddata.o: ..\HARDWARE\SendData\SendData.c
+..\obj\senddata.o: ..\APP\mp3player.h
+..\obj\senddata.o: ..\SYSTEM\sys\sys.h
+..\obj\senddata.o: ..\USER\stm32f10x.h
+..\obj\senddata.o: ..\CORE\core_cm3.h
+..\obj\senddata.o: E:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\senddata.o: ..\USER\system_stm32f10x.h
+..\obj\senddata.o: ..\USER\stm32f10x_conf.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_adc.h
+..\obj\senddata.o: ..\USER\stm32f10x.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_bkp.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_can.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_cec.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_crc.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_dac.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_dbgmcu.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_dma.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_exti.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_flash.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_fsmc.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_gpio.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_i2c.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_iwdg.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_pwr.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_rcc.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_rtc.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_sdio.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_spi.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_tim.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_usart.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\stm32f10x_wwdg.h
+..\obj\senddata.o: ..\STM32F10x_FWLib\inc\misc.h
+..\obj\senddata.o: ..\HARDWARE\VS10XX\vs10xx.h
+..\obj\senddata.o: ..\SYSTEM\delay\delay.h
+..\obj\senddata.o: ..\HARDWARE\LED\led.h
+..\obj\senddata.o: ..\HARDWARE\KEY\key.h
+..\obj\senddata.o: ..\HARDWARE\LCD\lcd.h
+..\obj\senddata.o: E:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+..\obj\senddata.o: ..\MALLOC\malloc.h
+..\obj\senddata.o: ..\TEXT\text.h
+..\obj\senddata.o: ..\TEXT\fontupd.h
+..\obj\senddata.o: E:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\obj\senddata.o: ..\FATFS\exfuns\exfuns.h
+..\obj\senddata.o: ..\FATFS\src\ff.h
+..\obj\senddata.o: ..\FATFS\src\integer.h
+..\obj\senddata.o: ..\FATFS\src\ffconf.h
+..\obj\senddata.o: ..\SYSTEM\usart\usart.h
+..\obj\senddata.o: E:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+..\obj\senddata.o: ..\HARDWARE\SendData\SendData.h
+..\obj\senddata.o: ..\HARDWARE\TPAD\tpad.h
+..\obj\senddata.o: ..\HARDWARE\MRRLCD\mrrlcd.h

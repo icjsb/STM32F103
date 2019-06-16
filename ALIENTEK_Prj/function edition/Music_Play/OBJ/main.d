@@ -49,3 +49,5 @@
 ..\obj\main.o: ..\TEXT\fontupd.h
 ..\obj\main.o: ..\HARDWARE\VS10XX\vs10xx.h
 ..\obj\main.o: ..\APP\mp3player.h
+..\obj\main.o: ..\HARDWARE\SendData\SendData.h
+..\obj\main.o: ..\HARDWARE\SRAM\sram.h

@@ -50,3 +50,13 @@
 ..\obj\main.o: ..\HARDWARE\VS10XX\vs10xx.h
 ..\obj\main.o: ..\HARDWARE\TPAD\tpad.h
 ..\obj\main.o: ..\APP\recorder.h
+..\obj\main.o: ..\HARDWARE\24CXX\24cxx.h
+..\obj\main.o: ..\HARDWARE\IIC\myiic.h
+..\obj\main.o: ..\HARDWARE\TOUCH\touch.h
+..\obj\main.o: ..\HARDWARE\TOUCH\ott2001a.h
+..\obj\main.o: ..\HARDWARE\TOUCH\gt9147.h
+..\obj\main.o: ..\HARDWARE\TOUCH\ft5206.h
+..\obj\main.o: ..\HARDWARE\MRRLCD\mrrlcd.h
+..\obj\main.o: ..\APP\mp3player.h
+..\obj\main.o: ..\HARDWARE\SendData\SendData.h
+..\obj\main.o: ..\HARDWARE\SRAM\sram.h
