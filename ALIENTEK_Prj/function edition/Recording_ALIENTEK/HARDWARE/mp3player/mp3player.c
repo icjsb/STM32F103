@@ -579,11 +579,11 @@ void mp3playRECEIVE(u8 playindex)
 				if(!firsttime)
 		{
 			firsttime=1;
-			draw_dir_record(540,curindex);//显示歌曲目录，y,目录索引
+			draw_dir_receive(540,curindex);//显示歌曲目录，y,目录索引
 		}
 		if(lastupdate!=curindex)
 		{
-			draw_dir_record(540,curindex);//显示歌曲目录，y,目录索引
+			draw_dir_receive(540,curindex);//显示歌曲目录，y,目录索引
 		}
 		lastupdate=curindex-1;	
 		
@@ -695,39 +695,7 @@ u8 mp3_play_song(u8 *pname)
 							
 						}
 						
-						
-//						tp_dev.scan(0);
-//						if((tp_dev.sta)&(1<<0)) //
-//						{
-//								//查看目录上一个信息
-//							//draw_button(430,16*5,"查看上一曲",16);
-//							//LCD_DrawRectangle((450-16*5-100),(y-10),450-100+20,(y+size+10));
-//							//LCD_DrawRectangle((450-16*5-100),(430-10),(450-100+20),(430+16+10));
-//							if(tp_dev.x[0]>(450-16*5-100)&&tp_dev.y[0]>(430-10)&&tp_dev.x[0]<(450-100+20)&&tp_dev.y[0]<(430+16+10))
-//							{	
-//									
-//								if(looknumb)
-//								{
-//									looknumb--;
-//							
-//								}
-//								else 
-//								{
-//									totmp3num=mp3_get_tnum("0:/MUSIC"); //得到总有效文件数
-//									looknumb=totmp3num-1;
-//								}
-
-//							}
-//								//draw_button(500,16*5,"查看下一曲",16);
-//								//LCD_DrawRectangle((450-16*5-100),(500-10),(450-100+20),(500+16+10));
-//								if(tp_dev.x[0]>(450-16*5-100)&&tp_dev.y[0]>(500-10)&&tp_dev.x[0]<(450-100+20)&&tp_dev.y[0]<(500+16+10))
-//							{
-//								looknumb++;
-//							}
-//						}
-//						draw_dir(540,looknumb);//显示歌曲目录，y,目录索引
-//			
-						
+									
 						
 						switch(key)
 						{

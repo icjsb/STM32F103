@@ -3,11 +3,11 @@
 <title>Static Call Graph - [..\OBJ\RECORDER.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\OBJ\RECORDER.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Sun Jun 16 16:50:54 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060528: Last Updated: Mon Jun 17 20:26:25 2019
 <BR><P>
 <H3>Maximum Stack Usage =        944 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-__rt_entry_main &rArr; main &rArr; touch_swtich &rArr; mp3playRECEIVE &rArr; draw_dir_record &rArr; mp3_get_tnum &rArr; f_opendir &rArr; follow_path &rArr; dir_find &rArr; dir_next &rArr; create_chain &rArr; put_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlock &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; CmdResp1Error
+__rt_entry_main &rArr; main &rArr; touch_swtich &rArr; mp3playRECEIVE &rArr; draw_dir_receive &rArr; mp3_get_tnum &rArr; f_opendir &rArr; follow_path &rArr; dir_find &rArr; dir_next &rArr; create_chain &rArr; put_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlock &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; CmdResp1Error
 <P>
 <H3>
 Functions with no stack information
@@ -300,7 +300,7 @@ Global Symbols
 
 <P><STRONG><a name="[8d]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
 <BR><BR>[Stack]<UL><LI>Max Depth = 944 + Unknown Stack Size
-<LI>Call Chain = __rt_entry_main &rArr; main &rArr; touch_swtich &rArr; mp3playRECEIVE &rArr; draw_dir_record &rArr; mp3_get_tnum &rArr; f_opendir &rArr; follow_path &rArr; dir_find &rArr; dir_next &rArr; create_chain &rArr; put_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlock &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; CmdResp1Error
+<LI>Call Chain = __rt_entry_main &rArr; main &rArr; touch_swtich &rArr; mp3playRECEIVE &rArr; draw_dir_receive &rArr; mp3_get_tnum &rArr; f_opendir &rArr; follow_path &rArr; dir_find &rArr; dir_next &rArr; create_chain &rArr; put_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlock &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; CmdResp1Error
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
@@ -324,7 +324,7 @@ Global Symbols
 
 <P><STRONG><a name="[8e]"></a>main</STRONG> (Thumb, 190 bytes, Stack size 16 bytes, main.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 944 + Unknown Stack Size
-<LI>Call Chain = main &rArr; touch_swtich &rArr; mp3playRECEIVE &rArr; draw_dir_record &rArr; mp3_get_tnum &rArr; f_opendir &rArr; follow_path &rArr; dir_find &rArr; dir_next &rArr; create_chain &rArr; put_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlock &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; CmdResp1Error
+<LI>Call Chain = main &rArr; touch_swtich &rArr; mp3playRECEIVE &rArr; draw_dir_receive &rArr; mp3_get_tnum &rArr; f_opendir &rArr; follow_path &rArr; dir_find &rArr; dir_next &rArr; create_chain &rArr; put_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlock &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; CmdResp1Error
 </UL>
 <BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart_init
 <LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;touch_swtich
@@ -736,6 +736,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_button_dir
 <LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_button
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;touch_swtich
 <LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Recording_Dialog
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> usmart_config.o(.data)
@@ -2229,7 +2230,7 @@ Global Symbols
 <LI><a href="#[b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 </UL>
 
-<P><STRONG><a name="[a0]"></a>mrrlcd_msg_show</STRONG> (Thumb, 328 bytes, Stack size 16 bytes, mrrlcd.o(.text))
+<P><STRONG><a name="[a0]"></a>mrrlcd_msg_show</STRONG> (Thumb, 330 bytes, Stack size 16 bytes, mrrlcd.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 272<LI>Call Chain = mrrlcd_msg_show &rArr; Show_Str &rArr; Show_Font &rArr; Get_HzMat &rArr; W25QXX_Read &rArr; SPI2_ReadWriteByte
 </UL>
 <BR>[Calls]<UL><LI><a href="#[177]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_draw_bline
@@ -2244,7 +2245,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_DrawRectangle
 <LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Show_Str
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;touch_swtich
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[17b]"></a>draw_button</STRONG> (Thumb, 102 bytes, Stack size 32 bytes, mrrlcd.o(.text))
@@ -2257,7 +2259,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;touch_swtich
 </UL>
 
-<P><STRONG><a name="[17c]"></a>draw_button_dir</STRONG> (Thumb, 454 bytes, Stack size 40 bytes, mrrlcd.o(.text))
+<P><STRONG><a name="[17c]"></a>draw_button_dir</STRONG> (Thumb, 452 bytes, Stack size 40 bytes, mrrlcd.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 296<LI>Call Chain = draw_button_dir &rArr; Show_Str &rArr; Show_Font &rArr; Get_HzMat &rArr; W25QXX_Read &rArr; SPI2_ReadWriteByte
 </UL>
 <BR>[Calls]<UL><LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_DrawRectangle
@@ -2309,7 +2311,6 @@ Global Symbols
 <LI><a href="#[185]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcpy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;touch_swtich
-<LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mp3playRECEIVE
 <LI><a href="#[18b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mp3playREC
 </UL>
 
@@ -2349,7 +2350,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;touch_swtich
 </UL>
 
-<P><STRONG><a name="[18a]"></a>draw_dir_receive</STRONG> (Thumb, 690 bytes, Stack size 128 bytes, mrrlcd.o(.text))
+<P><STRONG><a name="[18a]"></a>draw_dir_receive</STRONG> (Thumb, 688 bytes, Stack size 128 bytes, mrrlcd.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 712 + Unknown Stack Size
 <LI>Call Chain = draw_dir_receive &rArr; mp3_get_tnum &rArr; f_opendir &rArr; follow_path &rArr; dir_find &rArr; dir_next &rArr; create_chain &rArr; put_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlock &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; CmdResp1Error
 </UL>
@@ -2369,19 +2370,22 @@ Global Symbols
 <LI><a href="#[185]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcpy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;touch_swtich
+<LI><a href="#[18d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mp3playRECEIVE
 </UL>
 
-<P><STRONG><a name="[a2]"></a>touch_swtich</STRONG> (Thumb, 11760 bytes, Stack size 88 bytes, mrrlcd.o(.text))
+<P><STRONG><a name="[a2]"></a>touch_swtich</STRONG> (Thumb, 15678 bytes, Stack size 88 bytes, mrrlcd.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 928 + Unknown Stack Size
-<LI>Call Chain = touch_swtich &rArr; mp3playRECEIVE &rArr; draw_dir_record &rArr; mp3_get_tnum &rArr; f_opendir &rArr; follow_path &rArr; dir_find &rArr; dir_next &rArr; create_chain &rArr; put_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlock &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; CmdResp1Error
+<LI>Call Chain = touch_swtich &rArr; mp3playRECEIVE &rArr; draw_dir_receive &rArr; mp3_get_tnum &rArr; f_opendir &rArr; follow_path &rArr; dir_find &rArr; dir_next &rArr; create_chain &rArr; put_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlock &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; CmdResp1Error
 </UL>
 <BR>[Calls]<UL><LI><a href="#[187]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_dir_record
 <LI><a href="#[17d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_dir
 <LI><a href="#[17c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_button_dir
 <LI><a href="#[17b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_button
 <LI><a href="#[125]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VS_Sine_Test
+<LI><a href="#[10]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_DrawRectangle
 <LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TPAD_Scan
 <LI><a href="#[b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Recording_Dialog
 <LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Fill
 <LI><a href="#[191]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;txttransfer
 <LI><a href="#[190]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;recordertransfer
@@ -2565,10 +2569,9 @@ Global Symbols
 
 <P><STRONG><a name="[18d]"></a>mp3playRECEIVE</STRONG> (Thumb, 960 bytes, Stack size 128 bytes, mp3player.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 840 + Unknown Stack Size
-<LI>Call Chain = mp3playRECEIVE &rArr; draw_dir_record &rArr; mp3_get_tnum &rArr; f_opendir &rArr; follow_path &rArr; dir_find &rArr; dir_next &rArr; create_chain &rArr; put_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlock &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; CmdResp1Error
+<LI>Call Chain = mp3playRECEIVE &rArr; draw_dir_receive &rArr; mp3_get_tnum &rArr; f_opendir &rArr; follow_path &rArr; dir_find &rArr; dir_next &rArr; create_chain &rArr; put_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlock &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; CmdResp1Error
 </UL>
-<BR>[Calls]<UL><LI><a href="#[187]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_dir_record
-<LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VS_HD_Reset
+<BR>[Calls]<UL><LI><a href="#[124]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VS_HD_Reset
 <LI><a href="#[123]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VS_Soft_Reset
 <LI><a href="#[b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 <LI><a href="#[e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_Fill
@@ -2584,6 +2587,7 @@ Global Symbols
 <LI><a href="#[180]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_closedir
 <LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;dir_sdi
 <LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Show_Str
+<LI><a href="#[18a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;draw_dir_receive
 <LI><a href="#[186]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcat
 <LI><a href="#[185]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strcpy
 </UL>
@@ -5029,11 +5033,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;recoder_play
 </UL>
 
-<P><STRONG><a name="[228]"></a>rec_play_wav</STRONG> (Thumb, 200 bytes, Stack size 40 bytes, recorder.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 608 + Unknown Stack Size
-<LI>Call Chain = rec_play_wav &rArr; f_open &rArr; dir_register &rArr; dir_find &rArr; dir_next &rArr; create_chain &rArr; put_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlock &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; CmdResp1Error
-</UL>
-<BR>[Calls]<UL><LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VS_Set_All
+<P><STRONG><a name="[228]"></a>rec_play_wav</STRONG> (Thumb, 200 bytes, Stack size 40 bytes, recorder.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[137]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VS_Set_All
 <LI><a href="#[136]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VS_SPK_Set
 <LI><a href="#[131]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VS_Get_DecodeTime
 <LI><a href="#[130]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VS_Reset_DecodeTime
@@ -5048,12 +5049,10 @@ Global Symbols
 <LI><a href="#[16]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;myfree
 <LI><a href="#[225]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;recoder_show_time
 </UL>
-<BR>[Called By]<UL><LI><a href="#[18e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;recoder_play
-</UL>
 
-<P><STRONG><a name="[18e]"></a>recoder_play</STRONG> (Thumb, 1218 bytes, Stack size 112 bytes, recorder.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 720 + Unknown Stack Size
-<LI>Call Chain = recoder_play &rArr; rec_play_wav &rArr; f_open &rArr; dir_register &rArr; dir_find &rArr; dir_next &rArr; create_chain &rArr; put_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlock &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; CmdResp1Error
+<P><STRONG><a name="[18e]"></a>recoder_play</STRONG> (Thumb, 1064 bytes, Stack size 112 bytes, recorder.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 696 + Unknown Stack Size
+<LI>Call Chain = recoder_play &rArr; recoder_new_pathname &rArr; f_open &rArr; dir_register &rArr; dir_find &rArr; dir_next &rArr; create_chain &rArr; put_fat &rArr; move_window &rArr; sync_window &rArr; disk_write &rArr; SD_WriteDisk &rArr; SD_WriteBlock &rArr; SD_Init &rArr; SD_EnableWideBusOperation &rArr; SDEnWideBus &rArr; FindSCR &rArr; CmdResp1Error
 </UL>
 <BR>[Calls]<UL><LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VS_RD_Reg
 <LI><a href="#[121]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VS_WR_Cmd
@@ -5072,7 +5071,6 @@ Global Symbols
 <LI><a href="#[180]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;f_closedir
 <LI><a href="#[17a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Show_Str
 <LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-<LI><a href="#[228]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rec_play_wav
 <LI><a href="#[227]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;recoder_show_agc
 <LI><a href="#[226]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;recoder_new_pathname
 <LI><a href="#[225]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;recoder_show_time

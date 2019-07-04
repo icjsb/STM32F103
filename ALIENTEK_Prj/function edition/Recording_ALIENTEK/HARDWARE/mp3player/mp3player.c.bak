@@ -532,9 +532,9 @@ void mp3playRECEIVE(u8 playindex)
 	totmp3num=mp3_get_tnum("0:/RECEIVE"); //得到总有效文件数
   	while(totmp3num==NULL)//音乐文件总数为0		
  	{	    
-		Show_Str(30,190,240,16,"没有接收文件!",16,0);
+		Show_Str(30,190+650,240,16,"没有接收文件!",16,0);
 		delay_ms(200);				  
-		LCD_Fill(30,190,240,146,WHITE);//清除显示	     
+		LCD_Fill(30,190+650,240,146,WHITE);//清除显示	     
 		delay_ms(200);				  
 	}										   
   	mp3fileinfo.lfsize=_MAX_LFN*2+1;						//长文件名最大长度
@@ -553,7 +553,7 @@ void mp3playRECEIVE(u8 playindex)
 	vsset.mvol=220;						//默认设置音量为220.
 	mp3_vol_show((vsset.mvol-100)/5);	//音量限制在:100~250,显示的时候,按照公式(vol-100)/5,显示,也就是0~30   
 	//记录索引
-    res=f_opendir(&mp3dir,"0:/RECORDER"); //打开目录
+    res=f_opendir(&mp3dir,"0:/RECEIVE"); //打开目录
 	if(res==FR_OK)
 	{
 		curindex=0;//当前索引为0
@@ -573,17 +573,17 @@ void mp3playRECEIVE(u8 playindex)
 	}  
 	f_closedir(&mp3dir);
    	curindex=playindex;											//从0开始显示
-   	res=f_opendir(&mp3dir,(const TCHAR*)"0:/RECORDER"); 	//打开目录
+   	res=f_opendir(&mp3dir,(const TCHAR*)"0:/RECEIVE"); 	//打开目录
 	while(res==FR_OK)//打开成功
 	{	
 				if(!firsttime)
 		{
 			firsttime=1;
-			draw_dir_record(540,curindex);//显示歌曲目录，y,目录索引
+			draw_dir_receive(540,curindex);//显示歌曲目录，y,目录索引
 		}
 		if(lastupdate!=curindex)
 		{
-			draw_dir_record(540,curindex);//显示歌曲目录，y,目录索引
+			draw_dir_receive(540,curindex);//显示歌曲目录，y,目录索引
 		}
 		lastupdate=curindex-1;	
 		
@@ -593,7 +593,7 @@ void mp3playRECEIVE(u8 playindex)
         if(res!=FR_OK||mp3fileinfo.fname[0]==0)break;	//错误了/到末尾了,退出
      	fn=(u8*)(*mp3fileinfo.lfname?mp3fileinfo.lfname:mp3fileinfo.fname);		
 	
-		strcpy((char*)pname,"0:/RECORDER/");				//复制路径(目录)
+		strcpy((char*)pname,"0:/RECEIVE/");				//复制路径(目录)
 		strcat((char*)pname,(const char*)fn);  			//将文件名接在后面
  		LCD_Fill(30,490+220,480,190+16,WHITE);				//清除之前的显示
 		Show_Str(30,490+220,480-30,16,fn,16,0);				//显示歌曲名字 
